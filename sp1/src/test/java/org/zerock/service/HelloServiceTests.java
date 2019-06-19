@@ -17,9 +17,19 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class HelloServiceTests {
+		
 	
 	@Setter(onMethod_ = { @Autowired } )
 	private HelloService service;
+	
+	@Autowired
+	private Restaurant retaurant;
+	
+	@Test
+	public void testChef() {
+		retaurant.order();
+	}
+	
 	
 	@Test
 	public void testExist() {
@@ -27,6 +37,8 @@ public class HelloServiceTests {
 		log.info(service);
 		assertNotNull(service);
 	}
+	
+	
 	
 	
 

@@ -7,6 +7,15 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	
+		
 		<context:component-scan base-package="org.zerock.service"></context:component-scan>
+		
+<!-- 		<bean id="chef" class="org.zerock.service.Chef"></bean>
+		<bean id="restaurant" class="org.zerock.service.Restaurant">
+		<property name="chef" ref="chef"></property> 셋터주입
+		<constructor-arg ref="chef"></constructor-arg> 생성자주입
+		</bean> 
+-->
 
 </beans>
