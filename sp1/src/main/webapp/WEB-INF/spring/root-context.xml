@@ -38,8 +38,9 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="typeAliasesPackage" value="org.zerock.domain"></property>
 	</bean>
-	
-	<mybatis-spring:scan base-package="org.zerock.mapper"/>
+
+	<mybatis-spring:scan
+		base-package="org.zerock.mapper" />
 
 
 
@@ -47,6 +48,8 @@
 
 	<context:component-scan
 		base-package="org.zerock.service"></context:component-scan>
+
+
 
 
 
