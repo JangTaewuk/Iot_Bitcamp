@@ -45,7 +45,7 @@
 			<hr>
 
 
-			<a href="/board/list" class="btn btn-secondary"> Go to List </a>
+			<a href="/board/list${cri.getLink()}" class="btn btn-secondary"> Go to List </a>
 
 		</div>
 
@@ -55,13 +55,6 @@
 </div>
 <!-- End of Main Content -->
 
-<script>
-	var flag = '${result}';
-
-	if (flag === 'success') {
-		alert("작업이 성공했습니다.");
-	}
-</script>
 
 <%@include file="../includes/footer.jsp"%>
 
