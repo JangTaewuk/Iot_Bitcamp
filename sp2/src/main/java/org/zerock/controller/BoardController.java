@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.service.BoardService;
@@ -19,6 +20,32 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 
 	private BoardService service;
+	
+	@PostMapping("/modify")
+	public String modify(BoardVO vo, RedirectAttributes rttr) {
+		log.info("수정: "+vo);
+		service.modify(vo);
+		rttr.addFlashAttribute("result", "success");
+		
+		return "redirect:/board/list";
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("bno") Integer bno, RedirectAttributes rttr) {
+		log.info("del bno: "+bno);
+		int count = service.remove(bno);
+		
+		rttr.addFlashAttribute("result", "success");
+		
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping({"/read","/modify"})
+	public void read(@RequestParam("bno") Integer bno, Model model) {
+		log.info("bno: "+bno);
+		
+		model.addAttribute("vo", service.get(bno));
+	}
 	
 	@GetMapping("/list")
 	public void listall(Model model) {
