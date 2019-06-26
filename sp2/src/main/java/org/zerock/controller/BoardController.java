@@ -36,7 +36,7 @@ public class BoardController {
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Integer bno, RedirectAttributes rttr) {
 		log.info("del bno: "+bno);
-		int count = service.remove(bno);
+		service.remove(bno);
 		
 		rttr.addFlashAttribute("result", "success");
 		

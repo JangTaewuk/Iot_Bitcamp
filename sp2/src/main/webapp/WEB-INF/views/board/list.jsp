@@ -44,12 +44,11 @@
 				</table>
 				<ul class="pagination">
 
-
 					<c:if test="${pm.prev}">
 						<li class="page-item"><a class="page-link" href='${pm.getLink("/board/list",pm.getStart()-1)}'>Previous</a></li>
 					</c:if>
 					<c:forEach begin="${pm.start}" end="${pm.end}" var="idx">
-						<li class="page-item"><a class="page-link" href='${pm.getLink("/board/list",idx)}'>${idx}</a></li>
+						<li class="page-item ${pm.current == idx ? "active":"" } "><a class="page-link" href='${pm.getLink("/board/list",idx)}'>${idx}</a></li>
 					</c:forEach>
 
 					<c:if test="${pm.next}">
