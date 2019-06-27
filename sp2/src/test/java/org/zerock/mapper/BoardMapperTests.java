@@ -1,6 +1,10 @@
 package org.zerock.mapper;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +64,10 @@ public class BoardMapperTests {
 	public void testpage() {
 		// 1page 10amount , 0skip
 		Criteria cti = new Criteria();
-		cti.setPage(2);
+		cti.setAmount(20);
+		cti.setType("W");
+		cti.setKeyword("");
+		
 		
 		mapper.selectPage(cti).forEach(vo->log.info(vo));
 		
@@ -73,6 +80,42 @@ public class BoardMapperTests {
 		
 		log.info(pm);
 		log.info(pm.getLink("/board/list", 3));
+		
+	}
+	@Test
+	public void searchtest() {
+		Map<String, String> map = new HashMap<>();
+		map.put("T", "샘플");
+		map.put("C", "샘플");
+		map.put("W", "샘플");
+		
+		
+		mapper.search(map);
+	}
+	@Test
+	public void testMap() {
+		String type = "TCW";
+		String keyword = "홍길동";
+		
+		if(type==null || type.trim().length()==0) {
+			// return null;
+		}
+		
+		// T,C,W
+		String[] arr = type.split("");
+		
+		log.info(Arrays.toString(arr));
+		
+		Map<String,String> map = new HashMap<>();
+		
+		for (String word : arr) {
+			map.put(word, keyword);
+		}
+		
+		log.info(map);
+		
+		
+		
 		
 	}
 	

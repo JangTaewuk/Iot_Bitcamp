@@ -39,21 +39,40 @@
 					class="form-control form-control-user">
 			</div>
 
-			<button  class="btn btn-primary">
-			<a href="/board/modify?bno=${vo.bno}">Modify/Delete</a></button>
+			<button class="btn btn-primary modBtn">Modify/Delete</button>
+
+			<button class="btn btn-secondary listBtn">Go to List</button>
 
 			<hr>
 
-
-			<a href="/board/list${cri.getLink()}" class="btn btn-secondary"> Go to List </a>
 
 		</div>
 
 	</div>
 	<!-- /.container-fluid -->
+	<form id="actionForm" action="/board/modify" method="get">
+		<input type="hidden" name="bno" value="${cri.bno}"> 
+		<input type="hidden" name="page" value="${cri.page}"> 
+		<input	type="hidden" name="amount" value="${cri.amount}">
+		<input type="hidden" name="type" value="${cri.type}">
+		<input type="hidden" name="keyword" value="${cri.keyword}">
+	</form>
 
 </div>
 <!-- End of Main Content -->
+
+<script>
+var actionForm = $("#actionForm");
+
+	$(".modBtn").on("click", function(e) {
+		actionForm.submit();	
+	})
+	$(".listBtn").on("click", function(e) {
+		actionForm.find("input[name='bno']").remove();		
+		actionForm.attr("action","/board/list").submit();
+
+	})
+</script>
 
 
 <%@include file="../includes/footer.jsp"%>

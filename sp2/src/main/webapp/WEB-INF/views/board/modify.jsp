@@ -17,6 +17,13 @@
 		</div>
 		<div class="card-body">
 			<form id='form1'>
+
+				<input type="hidden" name="bno" value="${cri.bno}"> 
+				<input type="hidden" name="page" value="${cri.page}"> 
+				<input type="hidden" name="amount" value="${cri.amount}">
+				<input type="hidden" name="type" value="${cri.type}">
+				<input type="hidden" name="keyword" value="${cri.keyword}">
+
 				<div class="form-group">
 					<input type="text" name="bno" readonly="readonly"
 						value='<c:out value="${vo.bno}"/>'
@@ -39,13 +46,13 @@
 						class="form-control form-control-user">
 				</div>
 			</form>
-			
+
 			<button class="btn btn-warning">Modify</button>
 
 			<button class="btn btn-danger">Delete</button>
 
 			<hr>
-			<a href="/board/list" class="btn btn-secondary"> Go to List </a>
+			<button class="btn btn-secondary listBtn">Go to List </button>
 
 		</div>
 
@@ -56,26 +63,30 @@
 <!-- End of Main Content -->
 
 <script>
-	$(".btn-danger").on("click",function(){
-		console.log("delet button click");
+	$(".btn-danger").on(
+			"click",
+			function() {
+				console.log("delet button click");
+				var formObj = $("#form1");
+
+				formObj.attr("action", "/board/remove").attr("method", "post")
+						.submit();
+			});
+	$(".btn-warning").on(
+			"click",
+			function() {
+				console.log("delet button click");
+				var formObj = $("#form1");
+
+				formObj.attr("action", "/board/modify").attr("method", "post")
+						.submit();
+			});
+	$(".listBtn").on("click", function(e) {
 		var formObj = $("#form1");
-		
-		formObj
-			.attr("action","/board/remove")
-			.attr("method","post")
-			.submit();
+		formObj.find("input[name='bno']").remove();		
+		formObj.attr("action","/board/list").attr("method", "get").submit();
+
 	});
-	$(".btn-warning").on("click",function(){
-		console.log("delet button click");
-		var formObj = $("#form1");
-		
-		formObj
-			.attr("action","/board/modify")
-			.attr("method","post")
-			.submit();
-	});
-	
-	
 </script>
 
 <%@include file="../includes/footer.jsp"%>

@@ -15,4 +15,6 @@ public interface GenericService<VO, K> {
 	public int remove(K key);
 
 	public List<VO> getList(Criteria cri);
+	
+	public int getListCount(Criteria cri);
 }

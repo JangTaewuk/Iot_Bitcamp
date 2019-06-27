@@ -2,27 +2,93 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="org.zerock.mapper.BoardMapper">
-  <insert id="insert">
-  insert into tbl_board (title, content, writer)
-  values (#{title}, #{content}, #{writer})  
-  </insert>
-  
-  <select id="select" resultType="BoardVO">
-  select * from tbl_board where bno = #{bno}
-  </select>
-  
-  <select id="selectPage" resultType="BoardVO">
-    select * from tbl_board where bno > 0 
-    order by bno desc limit #{skip}, #{amount};  
-  </select>
-  
-  
-  <update id="update">
-  update tbl_board set title=#{title}, content=#{content}
-  where bno=#{bno}
-  </update>
-  
-  
-  </mapper>
+
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+<sql id="searchCri">
+		<if test="map != null">
+		<where> 
+			<foreach index="key" item="val" collection="map">
+				<trim prefix="OR">
+
+				<if test="key == 'T'.toString()">
+				title like concat('%',#{val},'%')
+				</if>
+
+				<if test="key == 'C'.toString()">
+				content like concat('%',#{val},'%')
+				</if>
+
+				<if test="key == 'W'.toString()">
+				writer like concat('%',#{val},'%')
+		 		 </if>
+				</trim>
+			</foreach>
+		</where>
+		</if>
+</sql>
+
+	<insert id="insert">
+		insert into tbl_board (title, content, writer)
+		values
+		(#{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="select" resultType="BoardVO">
+		select * from tbl_board where bno
+		= #{bno}
+	</select>
+
+	<select id="selectPage" resultType="BoardVO">
+
+		select
+		bno,title,content,writer,date_format(regdate, "%Y/%c/%e %r") AS
+		regdate from tbl_board
+		
+		<include refid="searchCri"></include>
+		 
+		
+		order by bno desc limit #{skip},
+		#{amount};
+	</select>
+
+
+	<update id="update">
+		update tbl_board set title=#{title},
+		content=#{content}
+		where bno=#{bno}
+	</update>
+
+	<select id="selectPageCount" resultType="int">
+		select count(bno) from tbl_board
+		<include refid="searchCri"></include>
+	</select>
+
+
+	<select id="search" resultType="BoardVO">
+		select * from tbl_board
+		<if test="map != null">
+		<where>
+			<foreach index="key" item="val" collection="map">
+				<trim prefix="OR">
+
+				<if test="key == 'T'.toString()">
+				title like concat('%',#{val},'%')
+				</if>
+
+				<if test="key == 'C'.toString()">
+				content like concat('%',#{val},'%')
+				</if>
+
+				<if test="key == 'W'.toString()">
+				writer like concat('%',#{val},'%')
+		 		 </if>
+				</trim>
+			</foreach>
+		</where>
+		</if>
+		order by bno desc limit 0,20
+	</select>
+
+
+</mapper>
