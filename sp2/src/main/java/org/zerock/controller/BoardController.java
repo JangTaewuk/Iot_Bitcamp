@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 
 	private BoardService service;
-	
+
 	@PostMapping("/modify")
 	public String modify(BoardVO vo,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("수정: "+vo);

@@ -29,6 +29,8 @@
 					<input type="text" name="writer"
 						class="form-control form-control-user" placeholder="Writer">
 				</div>
+				
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 				<button class="btn btn-primary">Submit</button>
 

@@ -23,6 +23,7 @@
 				<input type="hidden" name="amount" value="${cri.amount}">
 				<input type="hidden" name="type" value="${cri.type}">
 				<input type="hidden" name="keyword" value="${cri.keyword}">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 				<div class="form-group">
 					<input type="text" name="bno" readonly="readonly"

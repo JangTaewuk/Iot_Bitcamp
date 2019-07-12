@@ -41,9 +41,8 @@
 
 	<select id="selectPage" resultType="BoardVO">
 
-		select
-		bno,title,content,writer,date_format(regdate, "%Y/%c/%e %r") AS
-		regdate from tbl_board
+		select *
+		 from tbl_board
 		
 		<include refid="searchCri"></include>
 		 

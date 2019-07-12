@@ -14,6 +14,7 @@ import lombok.ToString;
 public class Criteria {
 	
 	private int page;
+	private int replyPage;
 	private int amount;
 	private Integer bno; // 인트는 0 인티저는 null
 	private String type;
@@ -21,6 +22,7 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page = 1;
+		this.replyPage= 1;
 		this.amount = 10;
 	}
 	public void setBno(Integer bno) {
@@ -71,6 +73,9 @@ public class Criteria {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public void setReplyPage(int replyPage) {
+		this.replyPage = page<=0 ? 1: page;
 	}
 	
 
